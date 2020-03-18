@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Runpath.Services;
@@ -27,7 +28,6 @@ namespace Runpath.Controllers
         [HttpGet]
         [Route("{userId}/photos")]
         public async Task<IActionResult> GetPhotosForUserAsync(int userId)
-        
         {
             var albums = await _albumService.GetAlbumsForUserAsync(userId);
 
