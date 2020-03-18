@@ -29,6 +29,7 @@ namespace Runpath.Services
         {
             var response = await _httpClient.GetAsync(GetAlbumsUrl);
 
+            response.EnsureSuccessStatusCode();
             using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
                 return (await JsonSerializer.DeserializeAsync <Album[]>(responseStream)).ToList();

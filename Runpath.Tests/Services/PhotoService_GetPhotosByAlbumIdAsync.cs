@@ -97,6 +97,20 @@ namespace Runpath.Tests.Services
             photos.Should().BeEquivalentTo(expectedPhotos);
         }
 
+
+        [Test]
+        public async Task When_HttpResponse_Has_UnsuccessfulStatusCode_ExceptionIsThrown()
+        {
+            var expectedPhotosUrl = "http://jsonplaceholder.typicode.com/photos";
+            var statusCode = HttpStatusCode.InternalServerError;
+            var content = "[]";
+            
+            var photoService = CreatePhotoService(expectedPhotosUrl, statusCode, content);
+            
+            Assert.ThrowsAsync<HttpRequestException>(() => photoService.GetPhotosByAlbumIdAsync(new List<int> { 1 }));
+
+        }
+
         private PhotoService CreatePhotoService(string expectedUrl, HttpStatusCode statusCode, string content)
         {
             var setting = new HttpTestingHandlerSettings

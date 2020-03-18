@@ -27,7 +27,7 @@ namespace Runpath.Services
         private async Task<IReadOnlyList<Photo>> GetPhotosAsync()
         {
             var response = await _httpClient.GetAsync(GetPhotosUrl);
-
+            response.EnsureSuccessStatusCode();
             using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
                 return await JsonSerializer.DeserializeAsync

@@ -84,6 +84,20 @@ namespace Runpath.Tests.Services
             albums.Should().BeEquivalentTo(expectedAlbums);
         }
 
+        [Test]
+        public void When_HttpResponse_Has_UnsuccessfulStatusCode_ExceptionIsThrown()
+        {
+            var expectedAlbumsUrl = @"http://jsonplaceholder.typicode.com/albums";
+            var statusCode = HttpStatusCode.InternalServerError;
+            var content = "[]";
+
+            var albumService = CreateAlbumService(expectedAlbumsUrl, statusCode, content);
+            
+            Assert.ThrowsAsync<HttpRequestException>(() => albumService.GetAlbumsForUserAsync(1));
+        }
+
+
+
         private AlbumService CreateAlbumService(string expectedUrl, HttpStatusCode statusCode, string content)
         {
             var setting = new HttpTestingHandlerSettings
