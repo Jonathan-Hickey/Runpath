@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Runpath.Services;
 
@@ -25,9 +26,10 @@ namespace Runpath.Controllers
 
         [HttpGet]
         [Route("{userId}/photos")]
-        public IActionResult GetPhotosForUser(int userId)
+        public async Task<IActionResult> GetPhotosForUserAsync(int userId)
+        
         {
-            var albums = _albumService.GetAlbumsForUser(userId);
+            var albums = await _albumService.GetAlbumsForUserAsync(userId);
 
             if (!albums.Any())
             {
@@ -35,7 +37,7 @@ namespace Runpath.Controllers
             }
 
             var albumIds = albums.Select(a => a.Id);
-            var photos = _photoService.GetPhotosByAlbumId(albumIds);
+            var photos = await _photoService.GetPhotosByAlbumIdAsync(albumIds);
 
             var albumLookUp = albums.ToDictionary(a => a.Id);
             var photoDtos = photos.Select(p => _photoMapper.Map(p, albumLookUp)).ToList();

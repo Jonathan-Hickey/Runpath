@@ -1,24 +1,24 @@
 ﻿using System.Runtime.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Runpath.Models
 {
-    [DataContract(Name = "photo")]
     public class Photo
     {
-        [DataMember(Name = "id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
 
-        [DataMember(Name = "albumId")]
+        [JsonPropertyName("albumId")]
         public int AlbumId { get; set; }
 
-        [DataMember(Name = "title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
-        [DataMember(Name = "url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
-        [DataMember(Name = "thumbnailUrl")]
+        [JsonPropertyName("thumbnailUrl")]
         public string ThumbnailUrl { get; set; }
 
     }

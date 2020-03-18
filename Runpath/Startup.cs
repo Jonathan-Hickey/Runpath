@@ -21,8 +21,14 @@ namespace Runpath
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient();
+
+
+            //ToDo: Move these into extension methods for services
             services.AddSingleton<IAlbumService, AlbumService>();
             services.AddSingleton<IPhotoService, PhotoService>();
+            
+            //ToDo: Move these into extension methods for Mappers
             services.AddSingleton<IPhotoMapper, PhotoMapper>();
             services.AddControllers();
         }
