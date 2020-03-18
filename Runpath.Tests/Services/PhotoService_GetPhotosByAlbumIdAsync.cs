@@ -65,7 +65,7 @@ namespace Runpath.Tests.Services
         }
 
         [Test]
-        public async Task When_HttpResponse_HasPhotos_But_NotForAlbumRequestedAlbum_ReturnsEmptyListOfPhotos()
+        public async Task When_HttpResponse_HasPhotos_But_NotForRequestedAlbum_ReturnsEmptyListOfPhotos()
         {
             var expectedPhotosUrl = "http://jsonplaceholder.typicode.com/photos";
             var statusCode = HttpStatusCode.OK;
